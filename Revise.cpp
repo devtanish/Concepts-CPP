@@ -1,33 +1,29 @@
 #include<iostream>
 #include<vector>
-#include<string>
 #include<algorithm>
 using namespace std;
-struct EmployeData{
-    string name, address; float sallery; int id; 
-};
-class Employe{
-    private: 
-        vector<EmployeData> emp; 
-    public:
-        Employe(int number_of_employes){
-            for(int i=0 ; i<number_of_employes ; i++){
-                struct EmployeData empData;
-                cout<<"Enter your name: ";cin>>empData.name;
-                cout<<"Enter your Id: ";cin>>empData.id;
-                cout<<"Enter your sallery: ";cin>>empData.sallery;
-                cout<<"Enter your address: ";cin>>empData.address;
-                emp.push_back(empData);
-            }
-        }
-        void dispaly(void){
-            for(auto x : emp){
-                cout<<x.name<<endl;
-                cout<<x.id<<endl;
-                cout<<x.sallery<<endl;
-                cout<<x.address<<endl;
-                cout<<"__________________________________________________________________________________________________________\n"<<endl;
-            }
-        }
-};
-int main() {Employe emp1(2); emp1.dispaly(); return 0;}
+
+vector<int> plusOne(vector<int>& digits){
+    int number = 0;
+    vector<int> num;
+    for (int x : digits) {
+        number = number * 10 + x;
+    }
+    number++;
+    if (number == 0) ; // edge case
+    while (number> 0) {
+        num.push_back(number % 10); // get last digit
+        number /= 10; // remove last digit
+    }
+    reverse(num.begin(), num.end()); // because we get digits in reverse order
+    return num;
+}
+
+int main() {
+    vector<int> value = {1, 2, 3, 4, 5, 6};
+    for(int x : plusOne(value)){
+        cout<<x;
+    }
+
+    return 0;
+}

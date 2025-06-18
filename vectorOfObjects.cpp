@@ -2,11 +2,9 @@
 #include<vector>
 #include<string>
 using namespace std;
-
 struct SchoolForm{
     int number; float sallery; string name; string schoolName;
 };
-
 int main() {
     vector<SchoolForm> array;
     struct SchoolForm schoolForm;
