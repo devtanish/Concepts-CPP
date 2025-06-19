@@ -13,33 +13,33 @@ using namespace std;
 */
 // Base class: Employe
 class Employe {
-    private: int Id = 1; // Private member: not accessible outside this class (even in derived class)
+    private: int Id=1; // Private member: not accessible outside this class (even in derived class)
     protected:
         // Protected members: accessible in derived class
-        string name = "Tanish", role = "Software Developer"; int salery = 10000000;
+        string name="Tanish", role="Software Developer"; int salery=10000000;
     public:
         // Parameterized constructor with default values
-        Employe(string Name = "Tanish", string Role = "Software Developer", int Salery = 10000000) {
-            name = Name; role = Role; salery = Salery; 
+        Employe(string Name="Tanish", string Role="Software Developer", int Salery=10000000) {
+            name=Name; role=Role; salery=Salery; 
             Id++; // This Id is private; cannot be accessed outside this class
         }
         // Public method: Can be accessed outside the class
         void getEmployedata(void) {
-            cout << "Employee name is: " << name << endl<< "Employee role is: " << role << endl<< "Employee salary is: " << salery << endl;
+            cout<<"Employee name is: "<<name<<endl<<"Employee role is: "<<role<<endl<<"Employee salary is: "<<salery<<endl;
         }
 };
 // Derived class: RoleDetail
 // Inherits Employe with 'protected' visibility mode
 // So, public members of Employe become protected here
 class RoleDetail : protected Employe {
-    private: int Id = 1;
+    private: int Id=1;
     protected:
         // Additional properties specific to RoleDetail
         string branch; int level, time;
     public:
         // Constructor for RoleDetail
         RoleDetail(string Branch, int Level, int Time) {
-            branch = Branch; level = Level; time = Time;
+            branch=Branch; level=Level; time=Time;
         }
         // Method to display RoleDetail data
         void getRoleDetail() {
