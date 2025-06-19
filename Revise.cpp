@@ -1,29 +1,56 @@
-#include<iostream>
-#include<vector>
-#include<algorithm>
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <string>
 using namespace std;
-
-vector<int> plusOne(vector<int>& digits){
-    int number = 0;
-    vector<int> num;
-    for (int x : digits) {
-        number = number * 10 + x;
-    }
-    number++;
-    if (number == 0) ; // edge case
-    while (number> 0) {
-        num.push_back(number % 10); // get last digit
-        number /= 10; // remove last digit
-    }
-    reverse(num.begin(), num.end()); // because we get digits in reverse order
-    return num;
-}
-
+/*
+    ====== Derived Class Visibility Table ======
+    Base Class Member      Public     Private     Protected
+    ------------------    --------   ---------   -----------
+    private                Not Inherited
+    protected              protected  private     protected
+    public                 public     private     protected
+*/
+// Base class: Employe
+class Employe {
+    private: int Id = 1; // Private member: not accessible outside this class (even in derived class)
+    protected:
+        // Protected members: accessible in derived class
+        string name = "Tanish", role = "Software Developer"; int salery = 10000000;
+    public:
+        // Parameterized constructor with default values
+        Employe(string Name = "Tanish", string Role = "Software Developer", int Salery = 10000000) {
+            name = Name; role = Role; salery = Salery; 
+            Id++; // This Id is private; cannot be accessed outside this class
+        }
+        // Public method: Can be accessed outside the class
+        void getEmployedata(void) {
+            cout << "Employee name is: " << name << endl<< "Employee role is: " << role << endl<< "Employee salary is: " << salery << endl;
+        }
+};
+// Derived class: RoleDetail
+// Inherits Employe with 'protected' visibility mode
+// So, public members of Employe become protected here
+class RoleDetail : protected Employe {
+    private: int Id = 1;
+    protected:
+        // Additional properties specific to RoleDetail
+        string branch; int level, time;
+    public:
+        // Constructor for RoleDetail
+        RoleDetail(string Branch, int Level, int Time) {
+            branch = Branch; level = Level; time = Time;
+        }
+        // Method to display RoleDetail data
+        void getRoleDetail() {
+            cout<<"Branch name is: "<<branch<<endl<<"Level of Role: "<<level<<endl<<"Working time is: "<<time<<endl;
+            // Accessing protected members inherited from Employe
+            cout<<"Employee name is: "<<name<<endl<<"Employee role is: "<<role<<endl<<"Employee salary is: "<<salery<<endl;
+        }
+};
 int main() {
-    vector<int> value = {1, 2, 3, 4, 5, 6};
-    for(int x : plusOne(value)){
-        cout<<x;
-    }
-
+    RoleDetail r1("Shaktinagar", 2, 20);
+    // r1.getEmployedata(); ❌ Not accessible - getEmployedata() became protected due to protected inheritance
+    r1.getRoleDetail(); // ✅ OK - public method of RoleDetail
     return 0;
 }
